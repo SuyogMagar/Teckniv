@@ -34,4 +34,4 @@
 
 | Suyog Magar      | [@SuyogMagar](https://github.com/SuyogMagar)           | Backend Developer   |
 | Akshat Dwivedi   | [@AkshatDwivedi](https://github.com/akshatdwivedi24)   | Backend Developer   |
-| Swastik Jangir   | [@alexjohnson](https://github.com/Swastikjangir)       | Frontend Developer  |
+| Swastik Jangir   | [@Swastikjangir](https://github.com/Swastikjangir)       | Frontend Developer  |
