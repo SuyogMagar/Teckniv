@@ -1,0 +1,186 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { 
+  Home, 
+  Users, 
+  Settings, 
+  FolderOpen, 
+  Briefcase, 
+  UserPlus, 
+  Mail, 
+  Menu, 
+  X,
+  Phone,
+  Mail as MailIcon
+} from 'lucide-react';
+import { siteConfig } from '../../config/siteConfig';
+
+const iconMap = {
+  Home,
+  Users,
+  Settings,
+  FolderOpen,
+  Briefcase,
+  UserPlus,
+  Mail
+};
+
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  return (
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+          : 'bg-white/90 backdrop-blur-sm'
+      }`}
+    >
+      {/* Top Bar */}
+      <div className="bg-primary-600 text-white py-2">
+        <div className="container-custom">
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Phone size={14} />
+                <span className="hidden sm:inline">{siteConfig.contact.phone}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MailIcon size={14} />
+                <span className="hidden sm:inline">{siteConfig.contact.email}</span>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center space-x-4">
+              <span>{siteConfig.contact.workingHours}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navigation */}
+      <nav className="py-3">
+        <div className="container-custom">
+          <div className="hidden lg:grid grid-cols-3 items-center">
+            {/* Left: Logo + Site Name */}
+            <div className="flex items-center space-x-2 min-w-0">
+              <Link to="/" className="flex items-center space-x-2 min-w-0">
+                <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-lg">T</span>
+                </div>
+                <div className="leading-tight min-w-0">
+                  <h1 className="text-base font-bold text-gray-900 truncate">{siteConfig.siteName}</h1>
+                  <p className="text-xs text-gray-600 truncate hidden xl:block">Engineering Excellence</p>
+                </div>
+              </Link>
+            </div>
+            {/* Center: Navigation */}
+            <div className="flex justify-center items-center space-x-3 min-w-0 overflow-x-auto">
+              {siteConfig.navigation.map((item) => {
+                const Icon = iconMap[item.icon];
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap ${
+                      isActive
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon size={18} />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            {/* Right: CTA Button */}
+            <div className="flex justify-end items-center">
+              <Link to="/contact" className="btn-primary px-4 py-2 text-base">
+                Get Quote
+              </Link>
+            </div>
+          </div>
+          {/* Mobile Layout (unchanged) */}
+          <div className="flex items-center justify-between lg:hidden">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-xl">T</span>
+              </div>
+              <div className="hidden sm:block">
+                <h1 className="text-xl font-bold text-gray-900 leading-tight">{siteConfig.siteName}</h1>
+                <p className="text-xs text-gray-600">Engineering Excellence</p>
+              </div>
+            </Link>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Navigation */}
+      <motion.div
+        initial={false}
+        animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+        className="lg:hidden overflow-hidden bg-white border-t"
+      >
+        <div className="container-custom py-4">
+          <div className="flex flex-col space-y-3">
+            {siteConfig.navigation.map((item) => {
+              const Icon = iconMap[item.icon];
+              const isActive = location.pathname === item.path;
+              
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
+                    isActive
+                      ? 'text-primary-600 bg-primary-50'
+                      : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <Icon size={20} className="flex-shrink-0" />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
+            <div className="pt-4 border-t border-gray-100">
+              <Link 
+                to="/contact" 
+                onClick={() => setIsOpen(false)}
+                className="btn-primary w-full text-center block"
+              >
+                Get Quote
+              </Link>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.header>
+  );
+};
+
+export default Header; 
