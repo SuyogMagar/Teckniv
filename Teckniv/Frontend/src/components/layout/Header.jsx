@@ -75,42 +75,50 @@ const Header = () => {
       {/* Main Navigation */}
       <nav className="py-3">
         <div className="container-custom">
-          <div className="hidden lg:grid grid-cols-3 items-center">
+          <div className="grid grid-cols-[2fr_1fr_auto] items-center">
             {/* Left: Logo + Site Name */}
-            <div className="flex items-center space-x-2 min-w-0">
-              <Link to="/" className="flex items-center space-x-2 min-w-0">
+            <div className="flex items-center justify-self-start pl-8">
+              <Link to="/" className="flex items-center">
                 <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-lg">T</span>
                 </div>
-                <div className="leading-tight min-w-0">
-                  <h1 className="text-base font-bold text-gray-900 truncate">{siteConfig.siteName}</h1>
-                  <p className="text-xs text-gray-600 truncate hidden xl:block">Engineering Excellence</p>
+                <div className="ml-2 flex flex-col justify-center">
+                  <h1 className="text-base font-bold text-gray-900 leading-tight">{siteConfig.siteName}</h1>
+                  <p className="text-xs text-gray-600 hidden xl:block leading-tight">Engineering Excellence</p>
                 </div>
               </Link>
             </div>
-            {/* Center: Navigation */}
-            <div className="flex justify-center items-center space-x-3 min-w-0 overflow-x-auto">
-              {siteConfig.navigation.map((item) => {
-                const Icon = iconMap[item.icon];
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap ${
-                      isActive
-                        ? 'text-primary-600 bg-primary-50'
-                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
-                    }`}
-                  >
-                    <Icon size={18} />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+            {/* Right-shifted Main Navigation */}
+            <div className="flex justify-end items-center space-x-3 min-w-0 pr-4">
+              {siteConfig.navigation
+                .filter(item => [
+                  'Services',
+                  'Projects',
+                  'Careers',
+                  'Vendor Registration',
+                  'Contact'
+                ].includes(item.name))
+                .map((item) => {
+                  const Icon = iconMap[item.icon];
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap ${
+                        isActive
+                          ? 'text-primary-600 bg-primary-50'
+                          : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                      }`}
+                    >
+                      {Icon && <Icon size={18} />}
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
             </div>
             {/* Right: CTA Button */}
-            <div className="flex justify-end items-center">
+            <div className="flex justify-end items-center justify-self-end pr-8">
               <Link to="/contact" className="btn-primary px-4 py-2 text-base">
                 Get Quote
               </Link>
