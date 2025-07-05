@@ -29,3 +29,9 @@
 - Modular, maintainable backend and frontend codebase
 
 ---
+
+## Collaborators
+
+| Suyog Magar      | [@SuyogMagar](https://github.com/SuyogMagar)           | Backend Developer   |
+| Akshat Dwivedi   | [@AkshatDwivedi](https://github.com/akshatdwivedi24)   | Backend Developer   |
+| Swastik Jangir   | [@alexjohnson](https://github.com/Swastikjangir)       | Frontend Developer  |
