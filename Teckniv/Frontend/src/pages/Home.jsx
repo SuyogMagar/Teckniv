@@ -41,21 +41,15 @@ const Home = () => {
                 className="text-center lg:text-left"
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                  {siteConfig.hero.title}
+                  Engineering Excellence. Global Impact.
                 </h1>
                 <p className="text-lg md:text-xl text-primary-100 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  {siteConfig.hero.subtitle}
+                  Teckniv Engineers Pvt. Ltd. is a leading engineering consultancy focused on delivering end-to-end solutions for Greenfield and Brownfield industrial projects across India and international markets.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link to={siteConfig.hero.ctaLink} className="btn-primary text-lg px-8 py-4">
                     {siteConfig.hero.ctaText}
                   </Link>
-                  <button className="flex items-center justify-center space-x-2 text-white hover:text-primary-200 transition-colors">
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                      <Play size={20} className="ml-1" />
-                    </div>
-                    <span>Watch Our Story</span>
-                  </button>
                 </div>
               </motion.div>
               <motion.div
@@ -65,23 +59,23 @@ const Home = () => {
                 className="relative flex justify-center lg:justify-end"
               >
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-md w-full">
-                  <h3 className="text-2xl font-semibold mb-6 text-center lg:text-left">Why Choose Us?</h3>
+                  <h3 className="text-2xl font-semibold mb-6 text-center lg:text-left">Why Teckniv?</h3>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="text-primary-300 flex-shrink-0" size={24} />
-                      <span>Expert Engineering Solutions</span>
+                      <span>Industry-specific engineering expertise</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="text-primary-300 flex-shrink-0" size={24} />
-                      <span>Global Industry Experience</span>
+                      <span>Proven track record with global and domestic clients</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="text-primary-300 flex-shrink-0" size={24} />
-                      <span>Quality & Innovation Focus</span>
+                      <span>Timely, cost-effective project delivery</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="text-primary-300 flex-shrink-0" size={24} />
-                      <span>Timely Project Delivery</span>
+                      <span>Custom solutions for every scale and complexity</span>
                     </div>
                   </div>
                 </div>
@@ -90,7 +84,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="bg-white py-16">
         <div className="container-custom">
@@ -112,7 +105,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* About Preview Section */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -123,29 +115,11 @@ const Home = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                {siteConfig.about.title}
+                About Teckniv Engineers Pvt. Ltd.
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                {siteConfig.about.description}
+                Teckniv Engineers Pvt. Ltd. is a leading engineering consultancy focused on delivering end-to-end solutions for Greenfield and Brownfield industrial projects across India and international markets. We bring together innovation, precision, and deep industry expertise to support complex projects in Chemicals, Agrochemicals, Pharmaceuticals, Petrochemicals, Oil & Gas, and Industrial Manufacturing.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-center space-x-3">
-                  <Users className="text-primary-600" size={24} />
-                  <span className="font-medium">Expert Team</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Award className="text-primary-600" size={24} />
-                  <span className="font-medium">Quality Certified</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Globe className="text-primary-600" size={24} />
-                  <span className="font-medium">Global Reach</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Target className="text-primary-600" size={24} />
-                  <span className="font-medium">Project Focus</span>
-                </div>
-              </div>
               <Link to="/about" className="btn-primary inline-flex items-center space-x-2">
                 <span>Learn More About Us</span>
                 <ArrowRight size={20} />
@@ -158,7 +132,7 @@ const Home = () => {
               className="relative"
             >
               <div className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-semibold mb-6">Our Industries</h3>
+                <h3 className="text-2xl font-semibold mb-6">Industries We Serve</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {siteConfig.industries.map((industry) => (
                     <div key={industry} className="flex items-center space-x-2">
@@ -172,7 +146,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Services Preview Section */}
       <section className="section-padding">
         <div className="container-custom">
@@ -186,10 +159,9 @@ const Home = () => {
               Our Services
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We offer comprehensive engineering solutions across multiple disciplines to meet your project requirements.
+              We provide comprehensive engineering services tailored to meet the technical, operational, and regulatory demands of industrial infrastructure.
             </p>
           </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {siteConfig.services.slice(0, 6).map((service, index) => {
               const Icon = iconMap[service.icon];
@@ -229,7 +201,6 @@ const Home = () => {
               );
             })}
           </div>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +213,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-custom text-center">

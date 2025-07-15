@@ -1,8 +1,8 @@
 // Site Configuration - Easy to modify for different content
 export const siteConfig = {
   // Basic Site Info
-  siteName: "Teckniv Engineers",
-  siteDescription: "Empowering Global Engineering with Quality, Innovation, and Precision",
+  siteName: "Teckniv Engineers Pvt. Ltd.",
+  siteDescription: "Engineering Excellence. Global Impact.",
   siteUrl: "https://teckniv.com",
   
   // Contact Information
@@ -34,8 +34,8 @@ export const siteConfig = {
   
   // Hero Section
   hero: {
-    title: "Powering Progress in Oil & Gas, Petrochemicals, Power, Hydrogen, and Beyond",
-    subtitle: "Expert Engineering Solutions for Optimal Efficiency, Safety, and Reliability",
+    title: "Engineering Excellence. Global Impact.",
+    subtitle: "Teckniv Engineers Pvt. Ltd. is a leading engineering consultancy focused on delivering end-to-end solutions for Greenfield and Brownfield industrial projects across India and international markets.",
     ctaText: "Get Started",
     ctaLink: "/contact",
     backgroundImage: "/images/hero-bg.jpg"
@@ -43,13 +43,13 @@ export const siteConfig = {
   
   // About Section
   about: {
-    title: "Empowering Global Engineering with Quality, Innovation, and Precision",
-    description: "Teckniv Engineers is a multi-discipline engineering services company. We offer high quality engineering support solutions to EPC contractors, PMC Consultant and directly to client operating in Oil & Gas, Petrochemicals, Power, Fertilizers and Water/ Wastewater industries in global market.",
+    title: "About Teckniv Engineers Pvt. Ltd.",
+    description: "Teckniv Engineers Pvt. Ltd. is a leading engineering consultancy focused on delivering end-to-end solutions for Greenfield and Brownfield industrial projects across India and international markets. We bring together innovation, precision, and deep industry expertise to support complex projects in Chemicals, Agrochemicals, Pharmaceuticals, Petrochemicals, Oil & Gas, and Industrial Manufacturing.",
     stats: [
-      { number: "70", label: "Projects Done" },
-      { number: "70", label: "Happy Clients" },
-      { number: "70", label: "Completed Co." },
-      { number: "70", label: "Country Cover" }
+      { number: "100", label: "Projects Delivered" },
+      { number: "50", label: "Clients Served" },
+      { number: "10", label: "Countries" },
+      { number: "15", label: "Industries" }
     ]
   },
   
@@ -57,93 +57,99 @@ export const siteConfig = {
   services: [
     {
       id: 1,
-      title: "Design & Detail Engineering",
-      description: "Comprehensive engineering design services for complex industrial projects",
+      title: "Detailed Engineering",
+      description: "End-to-End Multidisciplinary Design Solutions for Industrial Projects.",
       icon: "Settings",
       features: [
-        "Piping Engineering",
-        "Pipeline Engineering", 
         "Process Engineering",
-        "Electrical Engineering",
-        "Instrumentation Engineering"
+        "Piping Engineering",
+        "Equipment Engineering",
+        "Civil & Structural Engineering",
+        "Instrumentation Engineering",
+        "Electrical Engineering"
       ]
     },
     {
       id: 2,
-      title: "3D Modelling / Drafting",
-      description: "Advanced 3D modeling and CAD drafting services for precise project visualization",
+      title: "Pre-Bid Engineering Services",
+      description: "Feasibility, technical assessment, and bid documentation for Greenfield & Brownfield projects.",
       icon: "Box",
       features: [
-        "3D Plant Modeling",
-        "Equipment Modeling",
-        "Piping Isometrics",
-        "General Arrangement Drawings"
+        "Feasibility & Technical Assessment",
+        "Cost Estimation & BOQ",
+        "Preliminary Engineering Deliverables",
+        "Bid Documentation Support",
+        "Risk & Constructability Review"
       ]
     },
     {
       id: 3,
-      title: "Project Management",
-      description: "End-to-end project management ensuring timely delivery and quality control",
+      title: "Pipeline Engineering Services",
+      description: "Complete lifecycle support for pipeline projects: routing, stress analysis, and construction.",
       icon: "Target",
       features: [
-        "Project Planning",
-        "Resource Management",
-        "Risk Assessment",
-        "Quality Control"
+        "Route Selection & Alignment Studies",
+        "Hydraulic & Stress Analysis",
+        "Mechanical & Material Specification",
+        "Detailed Design & Drafting",
+        "Construction & Field Engineering Support"
       ]
     },
     {
       id: 4,
-      title: "FEA Analysis",
-      description: "Finite Element Analysis for structural integrity and performance optimization",
+      title: "3D Modeling Services",
+      description: "Intelligent 3D model development, clash detection, and visualization for plant projects.",
       icon: "Activity",
       features: [
-        "Structural Analysis",
-        "Thermal Analysis",
-        "Vibration Analysis",
-        "Fatigue Analysis"
+        "Intelligent 3D Model Development",
+        "Clash Detection & Coordination",
+        "Visualization & Walkthroughs",
+        "Deliverables & Outputs"
       ]
     },
     {
       id: 5,
-      title: "Pipe Stress Analysis",
-      description: "Comprehensive pipe stress analysis for safety and compliance",
+      title: "2D CAD Services",
+      description: "Multi-discipline drafting, drawing conversion, and compliance for all project stages.",
       icon: "Zap",
       features: [
-        "Static Analysis",
-        "Dynamic Analysis",
-        "Thermal Expansion",
-        "Code Compliance"
+        "Multi-Discipline Drafting Expertise",
+        "Technical Drawing Capabilities",
+        "Drawing Conversion & Compliance",
+        "CAD Software Platforms Used"
       ]
     },
     {
       id: 6,
-      title: "Professional Training",
-      description: "Specialized training programs for engineering professionals",
+      title: "Specialized Engineering Services",
+      description: "Advanced analysis, brownfield revamp, material & corrosion, and digital integration.",
       icon: "GraduationCap",
       features: [
-        "Software Training",
-        "Technical Workshops",
-        "Certification Programs",
-        "Industry Best Practices"
+        "Advanced Engineering Analysis",
+        "Brownfield Engineering & Revamp Projects",
+        "Material & Corrosion Engineering",
+        "Engineering Technology Integration"
       ]
     }
   ],
   
   // Industries
   industries: [
-    "Oil & Gas",
-    "Petrochemicals", 
-    "Power Generation",
-    "Fertilizers",
-    "Water/Wastewater",
-    "Hydrogen",
-    "Renewable Energy"
+    "Chemicals & Specialty Chemicals",
+    "Agrochemicals",
+    "Pharmaceuticals",
+    "Petrochemicals",
+    "Oil & Gas (Upstream, Midstream, Downstream)",
+    "Industrial Manufacturing",
+    "Power & Energy Plants",
+    "Food & Beverage",
+    "Water Treatment & Utilities",
+    "Commercial Infrastructure"
   ],
   
   // Footer
   footer: {
-    description: "Teckniv Engineers - Your trusted partner for engineering excellence from concept to completion.",
+    description: "Teckniv Engineers Pvt. Ltd. – Engineering Excellence. Global Impact. Your trusted partner for end-to-end industrial solutions.",
     quickLinks: [
       { name: "About Us", path: "/about" },
       { name: "Services", path: "/services" },
@@ -152,11 +158,12 @@ export const siteConfig = {
       { name: "Contact", path: "/contact" }
     ],
     services: [
-      "Design & Detail Engineering",
-      "3D Modelling / Drafting",
-      "Project Management",
-      "FEA Analysis",
-      "Professional Training"
+      "Detailed Engineering",
+      "Pre-Bid Engineering Services",
+      "Pipeline Engineering Services",
+      "3D Modeling Services",
+      "2D CAD Services",
+      "Specialized Engineering Services"
     ]
   }
 };

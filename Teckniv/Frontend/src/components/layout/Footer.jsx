@@ -39,7 +39,7 @@ const Footer = () => {
                 </div>
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed">
-                {siteConfig.footer.description}
+                Teckniv Engineers Pvt. Ltd. – Engineering Excellence. Global Impact. Your trusted partner for end-to-end industrial solutions.
               </p>
               <div className="flex space-x-4">
                 <a 

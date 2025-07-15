@@ -111,7 +111,7 @@ const Projects = () => {
               Our Projects
             </h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto leading-relaxed">
-              Explore our portfolio of successful engineering projects across various industries and sectors.
+              Explore our portfolio of successful engineering projects across Chemicals, Agrochemicals, Pharmaceuticals, Petrochemicals, Oil & Gas, Industrial Manufacturing, Power & Energy, Food & Beverage, Water Treatment, and Commercial Infrastructure.
             </p>
           </motion.div>
         </div>

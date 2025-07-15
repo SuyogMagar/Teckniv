@@ -34,94 +34,107 @@ const Careers = () => {
   const jobs = [
     {
       id: 1,
-      title: "Senior Piping Engineer",
+      title: "Piping Design Engineer",
       department: "Engineering",
-      location: "Mumbai, India",
+      location: "India",
       type: "Full-time",
-      experience: "8-12 years",
+      experience: "2–8 years",
       salary: "Competitive",
-      description: "We are looking for an experienced Piping Engineer to lead complex projects and mentor junior engineers.",
+      description: "Work on challenging EPC and engineering projects across Oil & Gas, Power, Infrastructure, and Industrial sectors. Software: AutoCAD Plant 3D, PDMS, SP3D.",
       requirements: [
-        "Bachelor's degree in Mechanical Engineering",
-        "8+ years of experience in piping design",
-        "Proficiency in AutoCAD, PDMS, CAESAR II",
-        "Experience in Oil & Gas industry",
-        "Strong leadership and communication skills"
+        "Bachelor's degree in Mechanical Engineering or related field",
+        "2–8 years of experience in piping design",
+        "Proficiency in AutoCAD Plant 3D, PDMS, SP3D",
+        "Experience in Oil & Gas or related industry",
+        "Strong teamwork and communication skills"
       ],
       responsibilities: [
-        "Lead piping design projects",
-        "Review and approve engineering drawings",
-        "Mentor junior engineers",
-        "Coordinate with other disciplines",
-        "Ensure compliance with codes and standards"
+        "Develop piping design and layouts",
+        "Coordinate with multidisciplinary teams",
+        "Ensure compliance with codes and standards",
+        "Support project execution and documentation"
       ]
     },
     {
       id: 2,
-      title: "Process Engineer",
-      department: "Process Engineering",
-      location: "Gujarat, India",
+      title: "Civil & Structural Engineer",
+      department: "Engineering",
+      location: "India",
       type: "Full-time",
-      experience: "5-8 years",
+      experience: "3–10 years",
       salary: "Competitive",
-      description: "Join our process engineering team to work on innovative projects in the petrochemical industry.",
+      description: "Design and analyze industrial structures. Software: STAAD.Pro, ETABS, AutoCAD.",
       requirements: [
-        "Bachelor's degree in Chemical Engineering",
-        "5+ years of process engineering experience",
-        "Knowledge of process simulation software",
-        "Experience in petrochemical industry",
-        "Strong analytical skills"
+        "Bachelor's degree in Civil/Structural Engineering",
+        "3–10 years of relevant experience",
+        "Proficiency in STAAD.Pro, ETABS, AutoCAD",
+        "Experience in industrial projects",
+        "Strong analytical and design skills"
       ],
       responsibilities: [
-        "Develop process designs and specifications",
-        "Perform process calculations and simulations",
-        "Prepare PFDs and P&IDs",
-        "Support project execution",
-        "Conduct feasibility studies"
+        "Structural analysis and design",
+        "Preparation of construction drawings",
+        "Coordination with project teams",
+        "Site supervision and QA/QC"
       ]
     },
     {
       id: 3,
-      title: "Electrical Engineer",
-      department: "Electrical Engineering",
-      location: "Karnataka, India",
+      title: "Instrumentation Engineer",
+      department: "Engineering",
+      location: "India",
       type: "Full-time",
-      experience: "6-10 years",
+      experience: "2–6 years",
       salary: "Competitive",
-      description: "We need an Electrical Engineer to design and implement electrical systems for industrial projects.",
+      description: "Instrumentation design and integration. Knowledge of hook-up diagrams, PLC/DCS systems, loop drawings.",
       requirements: [
-        "Bachelor's degree in Electrical Engineering",
-        "6+ years of electrical design experience",
-        "Knowledge of electrical codes and standards",
-        "Experience with ETAP or similar software",
-        "Project management skills"
+        "Bachelor's degree in Instrumentation/Electronics Engineering",
+        "2–6 years of relevant experience",
+        "Knowledge of hook-up diagrams, PLC/DCS systems, loop drawings",
+        "Experience in industrial automation projects"
       ],
       responsibilities: [
-        "Design electrical systems and equipment",
-        "Prepare electrical drawings and specifications",
-        "Perform load calculations and analysis",
-        "Coordinate with other engineering disciplines",
-        "Ensure safety and compliance"
+        "Instrumentation design and documentation",
+        "Integration with control systems",
+        "Support commissioning and troubleshooting"
       ]
     },
     {
       id: 4,
-      title: "Project Manager",
-      department: "Project Management",
-      location: "Maharashtra, India",
+      title: "Electrical Design Engineer",
+      department: "Engineering",
+      location: "India",
       type: "Full-time",
-      experience: "10-15 years",
+      experience: "3–8 years",
       salary: "Competitive",
-      description: "Lead multidisciplinary engineering projects and ensure successful delivery within scope, time, and budget.",
+      description: "Electrical system design for industrial projects. Software: ETAP, Dialux, AutoCAD Electrical.",
       requirements: [
-        "Bachelor's degree in Engineering",
-        "10+ years of project management experience",
-        "PMP certification preferred",
-        "Experience in EPC projects",
-        "Strong leadership and communication skills"
+        "Bachelor's degree in Electrical Engineering",
+        "3–8 years of relevant experience",
+        "Proficiency in ETAP, Dialux, AutoCAD Electrical",
+        "Experience in power distribution and automation"
       ],
       responsibilities: [
-        "Manage project scope, schedule, and budget",
+        "Electrical system design and documentation",
+        "Panel design and load management",
+        "Coordination with project teams"
+      ]
+    },
+    {
+      id: 5,
+      title: "Project Manager / Engineering Coordinator",
+      department: "Project Management",
+      location: "India",
+      type: "Full-time",
+      experience: "8–15 years",
+      salary: "Competitive",
+      description: "Multidisciplinary project leadership and client liaison.",
+      requirements: [
+        "Bachelor's degree in Engineering",
+        "8–15 years of project management experience",
+        "Strong multidisciplinary coordination and client interface skills"
+      ],
+      responsibilities: [
         "Lead project teams and stakeholders",
         "Ensure quality and safety standards",
         "Risk management and mitigation",
@@ -187,24 +200,44 @@ const Careers = () => {
 
   const benefits = [
     {
-      icon: Heart,
-      title: "Health & Wellness",
-      description: "Comprehensive health insurance and wellness programs"
-    },
-    {
       icon: Award,
-      title: "Professional Growth",
-      description: "Continuous learning opportunities and career advancement"
-    },
-    {
-      icon: Globe,
-      title: "Global Exposure",
-      description: "Work on international projects and travel opportunities"
+      title: "Diverse Project Exposure",
+      description: "Work on challenging EPC and engineering projects across Oil & Gas, Power, Infrastructure, and Industrial sectors."
     },
     {
       icon: Users,
-      title: "Team Environment",
-      description: "Collaborative work culture with experienced professionals"
+      title: "Collaborative Culture",
+      description: "A supportive work environment that encourages teamwork, innovation, and continuous learning."
+    },
+    {
+      icon: Heart,
+      title: "Individual Learning & Career Growth",
+      description: "Personalized development paths that support your technical and leadership journey."
+    },
+    {
+      icon: BookOpen,
+      title: "Training & Certification Assistance",
+      description: "Financial and logistical support for relevant technical certifications and upskilling programs."
+    },
+    {
+      icon: Globe,
+      title: "Overseas Career Opportunities",
+      description: "International project exposure and long-term global assignments."
+    },
+    {
+      icon: CheckCircle,
+      title: "Provident Fund & Group Insurance Plans",
+      description: "Secure your future with company-supported financial and health benefits."
+    },
+    {
+      icon: Clock,
+      title: "Work-Life Balance",
+      description: "We value wellness and provide a flexible and respectful workplace."
+    },
+    {
+      icon: Award,
+      title: "Recognition & Rewards",
+      description: "Performance-driven recognition with clear paths to advancement."
     }
   ];
 

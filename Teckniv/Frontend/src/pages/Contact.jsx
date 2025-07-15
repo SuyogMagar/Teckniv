@@ -394,7 +394,7 @@ const Contact = () => {
                   What industries do you serve?
                 </h3>
                 <p className="text-gray-600">
-                  We serve multiple industries including Oil & Gas, Petrochemicals, Power Generation, Fertilizers, Water/Wastewater, Hydrogen, and Renewable Energy.
+                  We serve Chemicals & Specialty Chemicals, Agrochemicals, Pharmaceuticals, Petrochemicals, Oil & Gas (Upstream, Midstream, Downstream), Industrial Manufacturing, Power & Energy Plants, Food & Beverage, Water Treatment & Utilities, and Commercial Infrastructure.
                 </p>
               </div>
               <div className="card p-6">

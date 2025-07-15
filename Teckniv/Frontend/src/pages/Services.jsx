@@ -45,12 +45,11 @@ const Services = () => {
               Our Services
             </h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive engineering solutions across multiple disciplines to meet your project requirements and exceed expectations.
+              Teckniv Engineers Pvt. Ltd. provides comprehensive engineering services tailored to meet the technical, operational, and regulatory demands of industrial infrastructure.
             </p>
           </motion.div>
         </div>
       </section>
-
       {/* Services Overview */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -64,15 +63,13 @@ const Services = () => {
               What We Do
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We offer a wide range of engineering services designed to support your projects from concept to completion.
+              We specialize in the design, execution, and project management of industrial facilities—from concept development to commissioning. Our solutions are tailored to meet each client’s technical, operational, and sustainability goals.
             </p>
           </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {siteConfig.services.map((service, index) => {
               const Icon = iconMap[service.icon];
               const isExpanded = expandedService === service.id;
-              
               return (
                 <motion.div
                   key={service.id}
@@ -92,14 +89,12 @@ const Services = () => {
                       {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                     </button>
                   </div>
-                  
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 mb-4">
                     {service.description}
                   </p>
-                  
                   {isExpanded && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
@@ -117,13 +112,8 @@ const Services = () => {
                           </li>
                         ))}
                       </ul>
-                      <button className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center space-x-1">
-                        <span>Learn More</span>
-                        <ExternalLink size={16} />
-                      </button>
                     </motion.div>
                   )}
-                  
                   {!isExpanded && (
                     <button
                       onClick={() => toggleService(service.id)}
@@ -139,7 +129,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-
       {/* Detailed Services */}
       <section className="section-padding">
         <div className="container-custom">
@@ -156,7 +145,6 @@ const Services = () => {
               Explore our comprehensive range of engineering services in detail.
             </p>
           </motion.div>
-
           {siteConfig.services.map((service, index) => {
             const Icon = iconMap[service.icon];
             return (
@@ -186,10 +174,6 @@ const Services = () => {
                         </div>
                       ))}
                     </div>
-                    <button className="btn-primary inline-flex items-center space-x-2">
-                      <span>Get Quote</span>
-                      <ArrowRight size={20} />
-                    </button>
                   </div>
                   <div className={`bg-gray-100 rounded-2xl p-8 ${index % 2 === 0 ? 'lg:order-2' : ''}`}>
                     <div className="text-center">
@@ -225,7 +209,6 @@ const Services = () => {
           })}
         </div>
       </section>
-
       {/* Industries We Serve */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -239,10 +222,9 @@ const Services = () => {
               Industries We Serve
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our expertise spans across multiple industries, providing tailored solutions for each sector.
+              We support complex projects in:
             </p>
           </motion.div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {siteConfig.industries.map((industry, index) => (
               <motion.div
@@ -261,7 +243,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-custom text-center">
