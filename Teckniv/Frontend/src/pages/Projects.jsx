@@ -22,7 +22,7 @@ const Projects = () => {
       title: "Oil Refinery Expansion Project",
       category: "Oil & Gas",
       description: "Comprehensive expansion project for a major oil refinery including piping design, 3D modeling, and stress analysis.",
-      image: "/images/projects/refinery.jpg",
+      image: "/images/projects/refinery.png",
       location: "Mumbai, India",
       duration: "18 months",
       team: "25 engineers",
@@ -34,7 +34,7 @@ const Projects = () => {
       title: "Petrochemical Plant Design",
       category: "Petrochemicals",
       description: "Complete design and engineering services for a new petrochemical plant with advanced process optimization.",
-      image: "/images/projects/petrochemical.jpg",
+      image: "/images/projects/petrochemical.jpeg",
       location: "Gujarat, India",
       duration: "24 months",
       team: "40 engineers",
@@ -46,7 +46,7 @@ const Projects = () => {
       title: "Power Plant Modernization",
       category: "Power Generation",
       description: "Modernization project for a thermal power plant including efficiency improvements and emission control systems.",
-      image: "/images/projects/power-plant.jpg",
+      image: "/images/projects/powerplant.jpeg",
       location: "Karnataka, India",
       duration: "12 months",
       team: "20 engineers",
@@ -58,7 +58,7 @@ const Projects = () => {
       title: "Fertilizer Plant Optimization",
       category: "Fertilizers",
       description: "Process optimization and capacity expansion for a fertilizer manufacturing facility.",
-      image: "/images/projects/fertilizer.jpg",
+      image: "/images/projects/fertilizerplant.jpeg",
       location: "Tamil Nadu, India",
       duration: "15 months",
       team: "30 engineers",
@@ -70,7 +70,7 @@ const Projects = () => {
       title: "Water Treatment Facility",
       category: "Water/Wastewater",
       description: "Design and construction of a large-scale water treatment facility with advanced filtration systems.",
-      image: "/images/projects/water-treatment.jpg",
+      image: "/images/projects/waterplant.jpg",
       location: "Maharashtra, India",
       duration: "20 months",
       team: "35 engineers",
@@ -176,7 +176,15 @@ const Projects = () => {
                   className="card overflow-hidden hover:transform hover:scale-105"
                 >
                   <div className="h-48 bg-gray-200 flex items-center justify-center">
-                    <div className="text-gray-500 text-center">
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="object-cover w-full h-full"
+                        onError={e => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentNode.querySelector('.fallback').style.display = 'block'; }}
+                      />
+                    ) : null}
+                    <div className="text-gray-500 text-center fallback" style={{display: project.image ? 'none' : 'block'}}>
                       <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
                         <ExternalLink size={24} />
                       </div>
@@ -229,7 +237,15 @@ const Projects = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="h-48 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <div className="text-gray-500 text-center">
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="object-cover w-full h-full"
+                          onError={e => { e.target.onerror = null; e.target.style.display = 'none'; e.target.parentNode.querySelector('.fallback').style.display = 'block'; }}
+                        />
+                      ) : null}
+                      <div className="text-gray-500 text-center fallback" style={{display: project.image ? 'none' : 'block'}}>
                         <div className="w-16 h-16 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
                           <ExternalLink size={24} />
                         </div>
