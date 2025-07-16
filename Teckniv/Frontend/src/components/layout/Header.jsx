@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -29,6 +29,14 @@ const iconMap = {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authStep, setAuthStep] = useState('role'); // 'role' | 'form'
+  const [authRole, setAuthRole] = useState(null); // 'user' | 'admin'
+  const [user, setUser] = useState(() => {
+    // Try to load user from localStorage
+    const stored = localStorage.getItem('tk_user');
+    return stored ? JSON.parse(stored) : null;
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -40,6 +48,88 @@ const Header = () => {
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Handle sign out
+  const handleSignOut = () => {
+    localStorage.removeItem('tk_user');
+    setUser(null);
+  };
+
+  // Handle auth form submit (mock JWT)
+  const handleAuthSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    // Simulate JWT and role
+    const userObj = { name, email, role: authRole, token: 'mock-jwt-token' };
+    localStorage.setItem('tk_user', JSON.stringify(userObj));
+    setUser(userObj);
+    setShowAuthModal(false);
+    setAuthStep('role');
+    setAuthRole(null);
+  };
+
+  // Modal content
+  const renderAuthModal = () => (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm relative">
+        <button
+          className="absolute top-2 right-2 text-gray-400 hover:text-gray-700"
+          onClick={() => {
+            setShowAuthModal(false);
+            setAuthStep('role');
+            setAuthRole(null);
+          }}
+        >
+          <X size={20} />
+        </button>
+        <>
+          <h2 className="text-lg font-bold mb-4 text-center">Register / Sign In As</h2>
+          <div className="flex flex-col gap-4">
+            <button
+              className="btn-primary w-full"
+              onClick={() => {
+                // Instantly sign in as user for testing
+                const userObj = { name: 'Test User', email: 'user@test.com', role: 'user', token: 'mock-jwt-token' };
+                localStorage.setItem('tk_user', JSON.stringify(userObj));
+                setUser(userObj);
+                setShowAuthModal(false);
+                setAuthStep('role');
+                setAuthRole(null);
+              }}
+            >
+              User
+            </button>
+            <button
+              className="btn-secondary w-full"
+              onClick={() => {
+                // Instantly sign in as admin for testing
+                const userObj = { name: 'Test Admin', email: 'admin@test.com', role: 'admin', token: 'mock-jwt-token' };
+                localStorage.setItem('tk_user', JSON.stringify(userObj));
+                setUser(userObj);
+                setShowAuthModal(false);
+                setAuthStep('role');
+                setAuthRole(null);
+              }}
+            >
+              Admin / Employer
+            </button>
+          </div>
+        </>
+      </div>
+    </div>
+  );
+
+  // Admin links (Careerfy-style)
+  const adminLinks = [
+    { name: 'Dashboard', path: '/admin/dashboard' },
+    { name: 'Post New Job', path: '/admin/post-job' },
+    { name: 'Manage Jobs', path: '/admin/manage-jobs' },
+    { name: 'View Applicants', path: '/admin/applicants' },
+    { name: 'Employer Profile', path: '/admin/profile' },
+  ];
 
   return (
     <motion.header
@@ -90,41 +180,78 @@ const Header = () => {
             </div>
             {/* Right-shifted Main Navigation */}
             <div className="flex justify-end items-center space-x-3 min-w-0 pr-4">
-              {siteConfig.navigation
-                .filter(item => [
-                  'Services',
-                  'Projects',
-                  'Careers',
-                  'Vendor Registration',
-                  'Contact'
-                ].includes(item.name))
-                .map((item) => {
-                  const Icon = iconMap[item.icon];
-                  const isActive = location.pathname === item.path;
-                  return (
+              {user && user.role === 'admin' ? (
+                // Admin navigation (Careerfy style)
+                <>
+                  {adminLinks.map(link => (
                     <Link
-                      key={item.name}
-                      to={item.path}
+                      key={link.name}
+                      to={link.path}
                       className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap ${
-                        isActive
+                        location.pathname === link.path
                           ? 'text-primary-600 bg-primary-50'
                           : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
                       }`}
                     >
-                      {Icon && <Icon size={18} />}
-                      <span>{item.name}</span>
+                      <span>{link.name}</span>
                     </Link>
-                  );
-                })}
+                  ))}
+                </>
+              ) : (
+                // Regular user navigation
+                <>
+                  {siteConfig.navigation
+                    .filter(item => [
+                      'Services',
+                      'Projects',
+                      'Careers',
+                      'Vendor Registration',
+                      'Contact'
+                    ].includes(item.name))
+                    .map((item) => {
+                      const Icon = iconMap[item.icon];
+                      const isActive = location.pathname === item.path;
+                      return (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className={`flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-300 font-medium whitespace-nowrap ${
+                            isActive
+                              ? 'text-primary-600 bg-primary-50'
+                              : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                          }`}
+                        >
+                          {Icon && <Icon size={18} />}
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
+                </>
+              )}
             </div>
-            {/* Right: CTA Button */}
+            {/* Right: Auth Button or User Name */}
             <div className="flex justify-end items-center justify-self-end pr-8">
-              <Link to="/contact" className="btn-primary px-4 py-2 text-base">
-                Get Quote
-              </Link>
+              {user ? (
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-primary-600">{user.name}</span>
+                  <button
+                    className="btn-secondary px-3 py-1 text-sm"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className="btn-primary px-4 py-2 text-base"
+                  onClick={() => setShowAuthModal(true)}
+                >
+                  Register / Sign In
+                </button>
+              )}
             </div>
           </div>
-          {/* Mobile Layout (unchanged) */}
+          {/* Mobile Layout (unchanged except auth button) */}
           <div className="flex items-center justify-between lg:hidden">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
@@ -146,7 +273,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
       {/* Mobile Navigation */}
       <motion.div
         initial={false}
@@ -158,7 +284,6 @@ const Header = () => {
             {siteConfig.navigation.map((item) => {
               const Icon = iconMap[item.icon];
               const isActive = location.pathname === item.path;
-              
               return (
                 <Link
                   key={item.name}
@@ -175,18 +300,46 @@ const Header = () => {
                 </Link>
               );
             })}
-            <div className="pt-4 border-t border-gray-100">
-              <Link 
-                to="/contact" 
+            {/* Admin Links (mobile) */}
+            {user && user.role === 'admin' && adminLinks.map(link => (
+              <Link
+                key={link.name}
+                to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="btn-primary w-full text-center block"
+                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 font-medium ${
+                  location.pathname === link.path
+                    ? 'text-primary-600 bg-primary-50'
+                    : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                }`}
               >
-                Get Quote
+                <span>{link.name}</span>
               </Link>
+            ))}
+            <div className="pt-4 border-t border-gray-100">
+              {user ? (
+                <div className="flex items-center gap-2 px-4">
+                  <span className="font-semibold text-primary-600">{user.name}</span>
+                  <button
+                    className="btn-secondary px-3 py-1 text-sm"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  className="btn-primary w-full text-center block"
+                  onClick={() => setShowAuthModal(true)}
+                >
+                  Register / Sign In
+                </button>
+              )}
             </div>
           </div>
         </div>
       </motion.div>
+      {/* Auth Modal */}
+      {showAuthModal && renderAuthModal()}
     </motion.header>
   );
 };
