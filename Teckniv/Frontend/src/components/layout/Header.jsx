@@ -29,9 +29,6 @@ const iconMap = {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authStep, setAuthStep] = useState('role'); // 'role' | 'form'
-  const [authRole, setAuthRole] = useState(null); // 'user' | 'admin'
   const [user, setUser] = useState(() => {
     // Try to load user from localStorage
     const stored = localStorage.getItem('tk_user');
@@ -47,6 +44,26 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleStorage = (e) => {
+      if (e.key === 'tk_user') {
+        const stored = localStorage.getItem('tk_user');
+        setUser(stored ? JSON.parse(stored) : null);
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    // Also listen for custom event in same tab
+    const handleCustom = () => {
+      const stored = localStorage.getItem('tk_user');
+      setUser(stored ? JSON.parse(stored) : null);
+    };
+    window.addEventListener('tk_user_changed', handleCustom);
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('tk_user_changed', handleCustom);
+    };
+  }, []);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   // Handle sign out
@@ -54,73 +71,6 @@ const Header = () => {
     localStorage.removeItem('tk_user');
     setUser(null);
   };
-
-  // Handle auth form submit (mock JWT)
-  const handleAuthSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    // Simulate JWT and role
-    const userObj = { name, email, role: authRole, token: 'mock-jwt-token' };
-    localStorage.setItem('tk_user', JSON.stringify(userObj));
-    setUser(userObj);
-    setShowAuthModal(false);
-    setAuthStep('role');
-    setAuthRole(null);
-  };
-
-  // Modal content
-  const renderAuthModal = () => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm relative">
-        <button
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-700"
-          onClick={() => {
-            setShowAuthModal(false);
-            setAuthStep('role');
-            setAuthRole(null);
-          }}
-        >
-          <X size={20} />
-        </button>
-        <>
-          <h2 className="text-lg font-bold mb-4 text-center">Register / Sign In As</h2>
-          <div className="flex flex-col gap-4">
-            <button
-              className="btn-primary w-full"
-              onClick={() => {
-                // Instantly sign in as user for testing
-                const userObj = { name: 'Test User', email: 'user@test.com', role: 'user', token: 'mock-jwt-token' };
-                localStorage.setItem('tk_user', JSON.stringify(userObj));
-                setUser(userObj);
-                setShowAuthModal(false);
-                setAuthStep('role');
-                setAuthRole(null);
-              }}
-            >
-              User
-            </button>
-            <button
-              className="btn-secondary w-full"
-              onClick={() => {
-                // Instantly sign in as admin for testing
-                const userObj = { name: 'Test Admin', email: 'admin@test.com', role: 'admin', token: 'mock-jwt-token' };
-                localStorage.setItem('tk_user', JSON.stringify(userObj));
-                setUser(userObj);
-                setShowAuthModal(false);
-                setAuthStep('role');
-                setAuthRole(null);
-              }}
-            >
-              Admin / Employer
-            </button>
-          </div>
-        </>
-      </div>
-    </div>
-  );
 
   // Admin links (Careerfy-style)
   const adminLinks = [
@@ -242,12 +192,12 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <button
+                <Link
+                  to="/auth"
                   className="btn-primary px-4 py-2 text-base"
-                  onClick={() => setShowAuthModal(true)}
                 >
                   Register / Sign In
-                </button>
+                </Link>
               )}
             </div>
           </div>
@@ -327,19 +277,18 @@ const Header = () => {
                   </button>
                 </div>
               ) : (
-                <button
+                <Link
+                  to="/auth"
                   className="btn-primary w-full text-center block"
-                  onClick={() => setShowAuthModal(true)}
+                  onClick={() => setIsOpen(false)}
                 >
                   Register / Sign In
-                </button>
+                </Link>
               )}
             </div>
           </div>
         </div>
       </motion.div>
-      {/* Auth Modal */}
-      {showAuthModal && renderAuthModal()}
     </motion.header>
   );
 };

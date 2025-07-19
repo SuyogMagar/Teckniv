@@ -34,4 +34,8 @@
   .card {
     @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
   }
+
+  .input {
+    @apply border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200;
+  }
 } 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -9,6 +9,13 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Careers from './pages/Careers';
 import VendorRegistration from './pages/VendorRegistration';
+import RegisterSignIn from './pages/RegisterSignIn';
+// Admin imports
+import AdminDashboard from './pages/AdminDashboard';
+import AdminPostJob from './pages/AdminPostJob';
+import AdminApplicants from './pages/AdminApplicants';
+import AdminProfile from './pages/AdminProfile';
+import ProtectedRoute from './components/layout/ProtectedRoute';
 
 function App() {
   return (
@@ -25,6 +32,12 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/vendor-registration" element={<VendorRegistration />} />
+              <Route path="/auth" element={<RegisterSignIn />} />
+              {/* Admin-only routes */}
+              <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/admin/post-job" element={<ProtectedRoute><AdminPostJob /></ProtectedRoute>} />
+              <Route path="/admin/applicants" element={<ProtectedRoute><AdminApplicants /></ProtectedRoute>} />
+              <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
             </Routes>
           </AnimatePresence>
         </main>
