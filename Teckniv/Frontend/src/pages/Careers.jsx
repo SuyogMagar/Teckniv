@@ -31,118 +31,8 @@ const Careers = () => {
     formState: { errors }
   } = useForm();
 
-  const jobs = [
-    {
-      id: 1,
-      title: "Piping Design Engineer",
-      department: "Engineering",
-      location: "India",
-      type: "Full-time",
-      experience: "2–8 years",
-      salary: "Competitive",
-      description: "Work on challenging EPC and engineering projects across Oil & Gas, Power, Infrastructure, and Industrial sectors. Software: AutoCAD Plant 3D, PDMS, SP3D.",
-      requirements: [
-        "Bachelor's degree in Mechanical Engineering or related field",
-        "2–8 years of experience in piping design",
-        "Proficiency in AutoCAD Plant 3D, PDMS, SP3D",
-        "Experience in Oil & Gas or related industry",
-        "Strong teamwork and communication skills"
-      ],
-      responsibilities: [
-        "Develop piping design and layouts",
-        "Coordinate with multidisciplinary teams",
-        "Ensure compliance with codes and standards",
-        "Support project execution and documentation"
-      ]
-    },
-    {
-      id: 2,
-      title: "Civil & Structural Engineer",
-      department: "Engineering",
-      location: "India",
-      type: "Full-time",
-      experience: "3–10 years",
-      salary: "Competitive",
-      description: "Design and analyze industrial structures. Software: STAAD.Pro, ETABS, AutoCAD.",
-      requirements: [
-        "Bachelor's degree in Civil/Structural Engineering",
-        "3–10 years of relevant experience",
-        "Proficiency in STAAD.Pro, ETABS, AutoCAD",
-        "Experience in industrial projects",
-        "Strong analytical and design skills"
-      ],
-      responsibilities: [
-        "Structural analysis and design",
-        "Preparation of construction drawings",
-        "Coordination with project teams",
-        "Site supervision and QA/QC"
-      ]
-    },
-    {
-      id: 3,
-      title: "Instrumentation Engineer",
-      department: "Engineering",
-      location: "India",
-      type: "Full-time",
-      experience: "2–6 years",
-      salary: "Competitive",
-      description: "Instrumentation design and integration. Knowledge of hook-up diagrams, PLC/DCS systems, loop drawings.",
-      requirements: [
-        "Bachelor's degree in Instrumentation/Electronics Engineering",
-        "2–6 years of relevant experience",
-        "Knowledge of hook-up diagrams, PLC/DCS systems, loop drawings",
-        "Experience in industrial automation projects"
-      ],
-      responsibilities: [
-        "Instrumentation design and documentation",
-        "Integration with control systems",
-        "Support commissioning and troubleshooting"
-      ]
-    },
-    {
-      id: 4,
-      title: "Electrical Design Engineer",
-      department: "Engineering",
-      location: "India",
-      type: "Full-time",
-      experience: "3–8 years",
-      salary: "Competitive",
-      description: "Electrical system design for industrial projects. Software: ETAP, Dialux, AutoCAD Electrical.",
-      requirements: [
-        "Bachelor's degree in Electrical Engineering",
-        "3–8 years of relevant experience",
-        "Proficiency in ETAP, Dialux, AutoCAD Electrical",
-        "Experience in power distribution and automation"
-      ],
-      responsibilities: [
-        "Electrical system design and documentation",
-        "Panel design and load management",
-        "Coordination with project teams"
-      ]
-    },
-    {
-      id: 5,
-      title: "Project Manager / Engineering Coordinator",
-      department: "Project Management",
-      location: "India",
-      type: "Full-time",
-      experience: "8–15 years",
-      salary: "Competitive",
-      description: "Multidisciplinary project leadership and client liaison.",
-      requirements: [
-        "Bachelor's degree in Engineering",
-        "8–15 years of project management experience",
-        "Strong multidisciplinary coordination and client interface skills"
-      ],
-      responsibilities: [
-        "Lead project teams and stakeholders",
-        "Ensure quality and safety standards",
-        "Risk management and mitigation",
-        "Client communication and reporting"
-      ]
-    }
-  ];
-
+  // Remove the jobs array and all references to it (job listings, job cards, etc.)
+  // In the job listing section, show a placeholder message:
   const trainingPrograms = [
     {
       id: 1,
@@ -340,76 +230,13 @@ const Careers = () => {
               </div>
 
               <div className="space-y-8">
-                {jobs.map((job, index) => (
-                  <motion.div
-                    key={job.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="card p-8"
-                  >
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                          {job.title}
-                        </h3>
-                        <p className="text-gray-600 mb-4">
-                          {job.description}
-                        </p>
-                        <div className="flex flex-wrap gap-4">
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            <Briefcase size={16} />
-                            <span>{job.department}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            <MapPin size={16} />
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            <Clock size={16} />
-                            <span>{job.type}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            <Users size={16} />
-                            <span>{job.experience}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 text-sm text-gray-600">
-                            <DollarSign size={16} />
-                            <span>{job.salary}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <button className="btn-primary mt-4 lg:mt-0">
-                        Apply Now
-                      </button>
+                <div className="card p-8 text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">No Job Openings Available</h3>
+                  <p className="text-gray-600">
+                    We are currently reviewing applications and will post new job openings soon.
+                    Please check back later or submit your application for future opportunities.
+                  </p>
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Requirements:</h4>
-                        <ul className="space-y-2">
-                          {job.requirements.map((req, idx) => (
-                            <li key={idx} className="flex items-start space-x-2 text-sm text-gray-600">
-                              <CheckCircle className="text-primary-500 mt-1" size={16} />
-                              <span>{req}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Responsibilities:</h4>
-                        <ul className="space-y-2">
-                          {job.responsibilities.map((resp, idx) => (
-                            <li key={idx} className="flex items-start space-x-2 text-sm text-gray-600">
-                              <CheckCircle className="text-primary-500 mt-1" size={16} />
-                              <span>{resp}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
               </div>
             </motion.div>
           )}
@@ -582,11 +409,7 @@ const Careers = () => {
                         }`}
                       >
                         <option value="">Select a position</option>
-                        {jobs.map((job) => (
-                          <option key={job.id} value={job.title}>
-                            {job.title}
-                          </option>
-                        ))}
+                        {/* The jobs array was removed, so this loop will not render options */}
                       </select>
                       {errors.position && (
                         <p className="text-red-500 text-sm mt-1">{errors.position.message}</p>
@@ -604,10 +427,7 @@ const Careers = () => {
                         }`}
                       >
                         <option value="">Select experience level</option>
-                        <option value="0-2">0-2 years</option>
-                        <option value="3-5">3-5 years</option>
-                        <option value="6-10">6-10 years</option>
-                        <option value="10+">10+ years</option>
+                        {/* The jobs array was removed, so this loop will not render options */}
                       </select>
                       {errors.experience && (
                         <p className="text-red-500 text-sm mt-1">{errors.experience.message}</p>
