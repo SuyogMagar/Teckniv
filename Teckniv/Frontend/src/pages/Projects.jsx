@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   ArrowRight, 
   ExternalLink, 
@@ -13,85 +13,29 @@ import {
 import { siteConfig } from '../config/siteConfig';
 
 const Projects = () => {
+  const [projects, setProjects] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [viewMode, setViewMode] = useState('grid');
 
-  const projects = [
-    {
-      id: 1,
-      title: "Oil Refinery Expansion Project",
-      category: "Oil & Gas",
-      description: "Comprehensive expansion project for a major oil refinery including piping design, 3D modeling, and stress analysis.",
-      image: "/images/projects/refinery.png",
-      location: "Mumbai, India",
-      duration: "18 months",
-      team: "25 engineers",
-      technologies: ["AutoCAD", "PDMS", "CAESAR II"],
-      features: ["Piping Design", "3D Modeling", "Stress Analysis", "Project Management"]
-    },
-    {
-      id: 2,
-      title: "Petrochemical Plant Design",
-      category: "Petrochemicals",
-      description: "Complete design and engineering services for a new petrochemical plant with advanced process optimization.",
-      image: "/images/projects/petrochemical.jpeg",
-      location: "Gujarat, India",
-      duration: "24 months",
-      team: "40 engineers",
-      technologies: ["SmartPlant", "AVEVA", "Aspen Plus"],
-      features: ["Process Design", "Equipment Design", "Safety Systems", "Control Systems"]
-    },
-    {
-      id: 3,
-      title: "Power Plant Modernization",
-      category: "Power Generation",
-      description: "Modernization project for a thermal power plant including efficiency improvements and emission control systems.",
-      image: "/images/projects/powerplant.jpeg",
-      location: "Karnataka, India",
-      duration: "12 months",
-      team: "20 engineers",
-      technologies: ["Revit", "ETAP", "AutoCAD"],
-      features: ["Electrical Design", "Instrumentation", "Efficiency Analysis", "Emission Control"]
-    },
-    {
-      id: 4,
-      title: "Fertilizer Plant Optimization",
-      category: "Fertilizers",
-      description: "Process optimization and capacity expansion for a fertilizer manufacturing facility.",
-      image: "/images/projects/fertilizerplant.jpeg",
-      location: "Tamil Nadu, India",
-      duration: "15 months",
-      team: "30 engineers",
-      technologies: ["PDMS", "HYSYS", "AutoCAD"],
-      features: ["Process Optimization", "Capacity Expansion", "Safety Analysis", "Quality Control"]
-    },
-    {
-      id: 5,
-      title: "Water Treatment Facility",
-      category: "Water/Wastewater",
-      description: "Design and construction of a large-scale water treatment facility with advanced filtration systems.",
-      image: "/images/projects/waterplant.jpg",
-      location: "Maharashtra, India",
-      duration: "20 months",
-      team: "35 engineers",
-      technologies: ["AutoCAD", "Revit", "EPANET"],
-      features: ["Treatment Design", "Piping Systems", "Control Systems", "Quality Monitoring"]
-    },
-    {
-      id: 6,
-      title: "Hydrogen Production Plant",
-      category: "Hydrogen",
-      description: "Green hydrogen production facility design with renewable energy integration and storage systems.",
-      image: "/images/projects/hydrogen.jpg",
-      location: "Rajasthan, India",
-      duration: "22 months",
-      team: "45 engineers",
-      technologies: ["AVEVA", "HYSYS", "AutoCAD"],
-      features: ["Process Design", "Renewable Integration", "Storage Systems", "Safety Design"]
-    }
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${siteConfig.api.baseUrl}/projects`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        // Optionally, set an error state here to show a message to the user
+      }
+    };
 
-  const categories = ['all', ...siteConfig.industries.map(industry => industry.toLowerCase())];
+    fetchProjects();
+  }, []);
+
+  const categories = ['all', ...Array.from(new Set(projects.map(p => p.category.toLowerCase())))];
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 

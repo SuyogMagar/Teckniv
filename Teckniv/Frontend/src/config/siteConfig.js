@@ -4,6 +4,11 @@ export const siteConfig = {
   siteName: "Teckniv Engineers Pvt. Ltd.",
   siteDescription: "Engineering Excellence. Global Impact.",
   siteUrl: "https://teckniv.com",
+
+  // API Configuration
+  api: {
+    baseUrl: "http://localhost:8080/api",
+  },
   
   // Contact Information
   contact: {
