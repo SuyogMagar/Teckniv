@@ -37,7 +37,7 @@ const RegisterSignIn = () => {
     setError('');
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     if (role === 'admin') {
       if (form.email === ADMIN_EMAIL && form.password === ADMIN_PASSWORD) {
@@ -50,19 +50,44 @@ const RegisterSignIn = () => {
       }
       return;
     }
-    // User sign in
-    const user = findUserByEmail(form.email);
-    if (!user || user.password !== form.password) {
-      setError('Invalid email or password');
-      return;
+    // User sign in via backend
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password
+        })
+      });
+      if (response.ok) {
+        // Try to get username from backend response, else fallback to email
+        let name = form.username;
+        try {
+          const data = await response.json();
+          if (data && data.username) {
+            name = data.username;
+          }
+        } catch {}
+        localStorage.setItem('tk_user', JSON.stringify({
+          name: name || form.email,
+          email: form.email,
+          role: 'user',
+          token: 'mock-jwt-token'
+        }));
+        window.dispatchEvent(new Event('tk_user_changed'));
+        setError('');
+        navigate('/');
+      } else {
+        const data = await response.text();
+        setError(data || 'Invalid email or password');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
     }
-    const userObj = { name: user.username, email: user.email, role: 'user', token: 'mock-jwt-token' };
-    localStorage.setItem('tk_user', JSON.stringify(userObj));
-    window.dispatchEvent(new Event('tk_user_changed'));
-    navigate('/');
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!form.username || !form.email || !form.password || !form.confirmPassword) {
       setError('All fields are required');
@@ -72,15 +97,28 @@ const RegisterSignIn = () => {
       setError('Passwords do not match');
       return;
     }
-    if (findUserByEmail(form.email)) {
-      setError('Email already registered');
-      return;
+    setError('');
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: form.username,
+          email: form.email,
+          password: form.password
+        })
+      });
+      if (response.ok) {
+        setMode('signin');
+        setForm({ username: '', email: '', password: '', confirmPassword: '' });
+        setError('Registration successful! Please sign in.');
+      } else {
+        const data = await response.text();
+        setError(data || 'Registration failed');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
     }
-    // Save user
-    saveUser({ username: form.username, email: form.email, password: form.password });
-    setMode('signin');
-    setForm({ username: '', email: '', password: '', confirmPassword: '' });
-    setError('Registration successful! Please sign in.');
   };
 
   return (
