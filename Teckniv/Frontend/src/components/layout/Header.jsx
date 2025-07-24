@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Home, 
@@ -35,6 +35,7 @@ const Header = () => {
     return stored ? JSON.parse(stored) : null;
   });
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,6 +71,7 @@ const Header = () => {
   const handleSignOut = () => {
     localStorage.removeItem('tk_user');
     setUser(null);
+    navigate('/');
   };
 
   // Admin links (Careerfy-style)
