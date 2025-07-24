@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { 
   Briefcase, 
@@ -23,6 +23,21 @@ const Careers = () => {
   const [activeTab, setActiveTab] = useState('jobs');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [jobs, setJobs] = useState([]);
+  const [loadingJobs, setLoadingJobs] = useState(true);
+
+  useEffect(() => {
+    if (activeTab === 'jobs') {
+      setLoadingJobs(true);
+      fetch('/api/jobs')
+        .then(res => res.json())
+        .then(data => {
+          setJobs(data);
+          setLoadingJobs(false);
+        })
+        .catch(() => setLoadingJobs(false));
+    }
+  }, [activeTab]);
 
   const {
     register,
@@ -230,13 +245,38 @@ const Careers = () => {
               </div>
 
               <div className="space-y-8">
-                <div className="card p-8 text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">No Job Openings Available</h3>
-                  <p className="text-gray-600">
-                    We are currently reviewing applications and will post new job openings soon.
-                    Please check back later or submit your application for future opportunities.
-                  </p>
+                {loadingJobs ? (
+                  <div className="card p-8 text-center">Loading jobs...</div>
+                ) : jobs.length === 0 ? (
+                  <div className="card p-8 text-center">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">No Job Openings Available</h3>
+                    <p className="text-gray-600">
+                      We are currently reviewing applications and will post new job openings soon.
+                      Please check back later or submit your application for future opportunities.
+                    </p>
+                  </div>
+                ) : (
+                  jobs.map(job => (
+                    <div key={job.id} className="card p-8">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{job.title}</h3>
+                      <div className="flex flex-wrap gap-4 mb-2 text-gray-600">
+                        {job.location && (
+                          <span className="flex items-center"><MapPin size={16} className="mr-1" />{job.location}</span>
+                        )}
+                        {job.postedDate && (
+                          <span className="flex items-center"><Clock size={16} className="mr-1" />Posted: {job.postedDate}</span>
+                        )}
+                        {job.salary && (
+                          <span className="flex items-center"><DollarSign size={16} className="mr-1" />{job.salary}</span>
+                        )}
+                      </div>
+                      <p className="text-gray-700 mb-4">{job.description}</p>
+                      <button className="btn-primary" onClick={() => setActiveTab('apply')}>
+                        Apply Now
+                      </button>
                     </div>
+                  ))
+                )}
               </div>
             </motion.div>
           )}

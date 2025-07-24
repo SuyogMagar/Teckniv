@@ -1,18 +1,34 @@
 import React, { useState } from 'react';
 
 const AdminPostJob = () => {
-  const [form, setForm] = useState({ title: '', department: '', location: '', type: '', description: '' });
+  const [form, setForm] = useState({ title: '', department: '', location: '', type: '', description: '', salary: '' });
   const [status, setStatus] = useState(null);
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // In a real app, send form to API
-    setStatus('Job posted (mock)');
-    setForm({ title: '', department: '', location: '', type: '', description: '' });
+    setStatus(null);
+    try {
+      const response = await fetch('/api/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: form.title,
+          description: form.description,
+          location: form.location,
+          postedDate: new Date().toISOString().slice(0, 10),
+          salary: form.salary
+        })
+      });
+      if (!response.ok) throw new Error('Failed to post job');
+      setStatus('Job posted successfully!');
+      setForm({ title: '', department: '', location: '', type: '', description: '', salary: '' });
+    } catch (err) {
+      setStatus('Error posting job');
+    }
   };
 
   return (
@@ -23,6 +39,7 @@ const AdminPostJob = () => {
         <input name="department" value={form.department} onChange={handleChange} placeholder="Department" className="input w-full" required />
         <input name="location" value={form.location} onChange={handleChange} placeholder="Location" className="input w-full" required />
         <input name="type" value={form.type} onChange={handleChange} placeholder="Job Type" className="input w-full" required />
+        <input name="salary" type="text" value={form.salary} onChange={handleChange} placeholder="Salary" className="input w-full" required />
         <textarea name="description" value={form.description} onChange={handleChange} placeholder="Job Description" className="input w-full" required />
         <button type="submit" className="btn-primary w-full">Post Job</button>
         {status && <div className="text-green-600 mt-2">{status}</div>}

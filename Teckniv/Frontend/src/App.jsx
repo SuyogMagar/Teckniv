@@ -15,6 +15,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminPostJob from './pages/AdminPostJob';
 import AdminApplicants from './pages/AdminApplicants';
 import AdminProfile from './pages/AdminProfile';
+import AdminManageJobs from './pages/AdminManageJobs';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
               <Route path="/admin/post-job" element={<ProtectedRoute><AdminPostJob /></ProtectedRoute>} />
               <Route path="/admin/applicants" element={<ProtectedRoute><AdminApplicants /></ProtectedRoute>} />
               <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
+              <Route path="/admin/manage-jobs" element={<ProtectedRoute><AdminManageJobs /></ProtectedRoute>} />
             </Routes>
           </AnimatePresence>
         </main>
