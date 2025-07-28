@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Careers from './pages/Careers';
 import VendorRegistration from './pages/VendorRegistration';
 import RegisterSignIn from './pages/RegisterSignIn';
+import ServiceDetail from './pages/ServiceDetail';
 // Admin imports
 import AdminDashboard from './pages/AdminDashboard';
 import AdminPostJob from './pages/AdminPostJob';
@@ -29,6 +30,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/services/:serviceId" element={<ServiceDetail />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />

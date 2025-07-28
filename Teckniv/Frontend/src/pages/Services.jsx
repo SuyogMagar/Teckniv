@@ -14,10 +14,10 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
-  const [expandedService, setExpandedService] = useState(null);
-
+  // Remove expandedService and toggleService
   const iconMap = {
     Settings,
     Box,
@@ -25,10 +25,6 @@ const Services = () => {
     Activity,
     Zap,
     GraduationCap
-  };
-
-  const toggleService = (serviceId) => {
-    setExpandedService(expandedService === serviceId ? null : serviceId);
   };
 
   return (
@@ -69,7 +65,6 @@ const Services = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {siteConfig.services.map((service, index) => {
               const Icon = iconMap[service.icon];
-              const isExpanded = expandedService === service.id;
               return (
                 <motion.div
                   key={service.id}
@@ -78,135 +73,36 @@ const Services = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="card p-6 hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                      <Icon className="text-primary-600" size={24} />
+                  <Link to={`/services/${service.id}`} className="block focus:outline-none">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <Icon className="text-primary-600" size={24} />
+                      </div>
+                      <ArrowRight className="text-primary-600" size={20} />
                     </div>
-                    <button
-                      onClick={() => toggleService(service.id)}
-                      className="p-1 hover:bg-gray-100 rounded transition-colors"
-                    >
-                      {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                    </button>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {service.description}
-                  </p>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="border-t pt-4"
-                    >
-                      <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
-                      <ul className="space-y-2 mb-4">
-                        {service.features.map((feature) => (
-                          <li key={feature} className="flex items-center space-x-2 text-sm text-gray-600">
-                            <CheckCircle className="text-primary-500" size={16} />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                  {!isExpanded && (
-                    <button
-                      onClick={() => toggleService(service.id)}
-                      className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center space-x-1"
-                    >
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {service.description}
+                    </p>
+                    <ul className="space-y-2 mb-4">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-center space-x-2 text-sm text-gray-600">
+                          <CheckCircle className="text-primary-500" size={16} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <span className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center space-x-1">
                       <span>View Details</span>
-                      <ChevronDown size={16} />
-                    </button>
-                  )}
+                      <ArrowRight size={16} />
+                    </span>
+                  </Link>
                 </motion.div>
               );
             })}
           </div>
-        </div>
-      </section>
-      {/* Detailed Services */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Service Details
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Explore our comprehensive range of engineering services in detail.
-            </p>
-          </motion.div>
-          {siteConfig.services.map((service, index) => {
-            const Icon = iconMap[service.icon];
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`mb-16 ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  <div className={index % 2 === 0 ? '' : 'lg:order-2'}>
-                    <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-                      <Icon className="text-primary-600" size={32} />
-                    </div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                      {service.features.map((feature) => (
-                        <div key={feature} className="flex items-center space-x-3">
-                          <CheckCircle className="text-primary-600" size={20} />
-                          <span className="font-medium">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className={`bg-gray-100 rounded-2xl p-8 ${index % 2 === 0 ? 'lg:order-2' : ''}`}>
-                    <div className="text-center">
-                      <div className="w-24 h-24 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Icon className="text-white" size={48} />
-                      </div>
-                      <h4 className="text-xl font-semibold text-gray-900 mb-4">
-                        Why Choose {service.title}?
-                      </h4>
-                      <ul className="space-y-3 text-left">
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="text-primary-600 mt-1" size={20} />
-                          <span>Expert team with specialized knowledge</span>
-                        </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="text-primary-600 mt-1" size={20} />
-                          <span>Proven track record of successful projects</span>
-                        </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="text-primary-600 mt-1" size={20} />
-                          <span>Latest technology and industry standards</span>
-                        </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="text-primary-600 mt-1" size={20} />
-                          <span>Comprehensive project management</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
         </div>
       </section>
       {/* Industries We Serve */}
